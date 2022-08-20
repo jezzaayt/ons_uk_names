@@ -1,2 +1,11 @@
-# ons_uk_names
+# Office of National Statistics
 A Quarto project in R explored data from UK's ONS. Names are ranked and commented when it was first put in top 100 listings. 
+
+
+For 1996 - 2020 names the following data was used:
+https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesinenglandandwalesfrom1996
+
+For historical data from 1904 - 1994 which was published every 10 years the following data was used:
+https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalestop100babynameshistoricaldata
+
+Merged the data so can analyse and visualise the data. 
