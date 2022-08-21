@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Office of National Statistics (UK) Baby Names</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="main_files/libs/clipboard/clipboard.min.js"></script>
+<script src="main_files/libs/quarto-html/quarto.js"></script>
+<script src="main_files/libs/quarto-html/popper.min.js"></script>
+<script src="main_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="main_files/libs/quarto-html/anchor.min.js"></script>
+<link href="main_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="main_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="main_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="main_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="main_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Office of National Statistics (UK) Baby Names</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="why-did-i-build-this" class="level2">
+<h2 class="anchored" data-anchor-id="why-did-i-build-this">Why did I build this?</h2>
+<p>I wanted to investigate names and when they were first and latest recorded as births after seeing a statistic for names in a trivia game “Shot in the Dark”. While seeing Quarto and Shiny project. I took the top 100 names from the listings and some names outside of the top 100 as was curious for those names.</p>
+<p>So if were wanting to use the data for top 100, would have to filter the data set</p>
+<p>In process of creating this, I discovered there is similar tool created by <a href="https://names.darkgreener.com/">Anna Powell Smith</a>. Though, I am using this as a learning experience on R Shiny and Quarto.</p>
+<p>Data set Columns: Rank, Year, Name, Gender, Count of births</p>
+<p>Total number of births are counted from 1996 on wards as the data set from 1904-1994 did not include number of births.</p>
+<div class="cell">
+<div class="cell-output-display no-overflow-x">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="names_options-label" for="names_options">Names:</label>
+<div>
+<select id="names_options"><option value="Aaliyah" selected="">Aaliyah</option>
+<option value="Aaron">Aaron</option>
+<option value="Abbie">Abbie</option>
+<option value="Abby">Abby</option>
+<option value="Abdul">Abdul</option>
+<option value="Abigail">Abigail</option>
+<option value="Ada">Ada</option>
+<option value="Adam">Adam</option>
+<option value="Adrian">Adrian</option>
+<option value="Agnes">Agnes</option>
+<option value="Aidan">Aidan</option>
+<option value="Aiden">Aiden</option>
+<option value="Aimee">Aimee</option>
+<option value="Aisha">Aisha</option>
+<option value="Alan">Alan</option>
+<option value="Albert">Albert</option>
+<option value="Albie">Albie</option>
+<option value="Alec">Alec</option>
+<option value="Alex">Alex</option>
+<option value="Alexander">Alexander</option>
+<option value="Alexandra">Alexandra</option>
+<option value="Alfie">Alfie</option>
+<option value="Alfred">Alfred</option>
+<option value="Alice">Alice</option>
+<option value="Alicia">Alicia</option>
+<option value="Alisha">Alisha</option>
+<option value="Alison">Alison</option>
+<option value="Allan">Allan</option>
+<option value="Alma">Alma</option>
+<option value="Amanda">Amanda</option>
+<option value="Amber">Amber</option>
+<option value="Amelia">Amelia</option>
+<option value="Amelie">Amelie</option>
+<option value="Amy">Amy</option>
+<option value="Andrea">Andrea</option>
+<option value="Andrew">Andrew</option>
+<option value="Angela">Angela</option>
+<option value="Anita">Anita</option>
+<option value="Ann">Ann</option>
+<option value="Anna">Anna</option>
+<option value="Annabelle">Annabelle</option>
+<option value="Anne">Anne</option>
+<option value="Annette">Annette</option>
+<option value="Annie">Annie</option>
+<option value="Anthony">Anthony</option>
+<option value="Antony">Antony</option>
+<option value="Arabella">Arabella</option>
+<option value="Archibald">Archibald</option>
+<option value="Archie">Archie</option>
+<option value="Aria">Aria</option>
+<option value="Arlo">Arlo</option>
+<option value="Arnold">Arnold</option>
+<option value="Arthur">Arthur</option>
+<option value="Ashleigh">Ashleigh</option>
+<option value="Ashley">Ashley</option>
+<option value="Ashton">Ashton</option>
+<option value="Audrey">Audrey</option>
+<option value="Aurora">Aurora</option>
+<option value="Austin">Austin</option>
+<option value="Ava">Ava</option>
+<option value="Ayla">Ayla</option>
+<option value="Bailey">Bailey</option>
+<option value="Barbara">Barbara</option>
+<option value="Barrie">Barrie</option>
+<option value="Barry">Barry</option>
+<option value="Basil">Basil</option>
+<option value="Beatrice">Beatrice</option>
+<option value="Bella">Bella</option>
+<option value="Ben">Ben</option>
+<option value="Benjamin">Benjamin</option>
+<option value="Bernard">Bernard</option>
+<option value="Bertha">Bertha</option>
+<option value="Bertie">Bertie</option>
+<option value="Bertram">Bertram</option>
+<option value="Beryl">Beryl</option>
+<option value="Bessie">Bessie</option>
+<option value="Beth">Beth</option>
+<option value="Bethan">Bethan</option>
+<option value="Bethany">Bethany</option>
+<option value="Betty">Betty</option>
+<option value="Beverley">Beverley</option>
+<option value="Billy">Billy</option>
+<option value="Blake">Blake</option>
+<option value="Blanche">Blanche</option>
+<option value="Bobby">Bobby</option>
+<option value="Bonnie">Bonnie</option>
+<option value="Bradley">Bradley</option>
+<option value="Brandon">Brandon</option>
+<option value="Brenda">Brenda</option>
+<option value="Brett">Brett</option>
+<option value="Brian">Brian</option>
+<option value="Bridget">Bridget</option>
+<option value="Brooke">Brooke</option>
+<option value="Bruce">Bruce</option>
+<option value="Bryan">Bryan</option>
+<option value="Caitlin">Caitlin</option>
+<option value="Caleb">Caleb</option>
+<option value="Callum">Callum</option>
+<option value="Calum">Calum</option>
+<option value="Cameron">Cameron</option>
+<option value="Carl">Carl</option>
+<option value="Carla">Carla</option>
+<option value="Carly">Carly</option>
+<option value="Carol">Carol</option>
+<option value="Carole">Carole</option>
+<option value="Caroline">Caroline</option>
+<option value="Carolyn">Carolyn</option>
+<option value="Carter">Carter</option>
+<option value="Catherine">Catherine</option>
+<option value="Cecil">Cecil</option>
+<option value="Cerys">Cerys</option>
+<option value="Chantelle">Chantelle</option>
+<option value="Charlene">Charlene</option>
+<option value="Charles">Charles</option>
+<option value="Charlie">Charlie</option>
+<option value="Charlotte">Charlotte</option>
+<option value="Chelsea">Chelsea</option>
+<option value="Cheryl">Cheryl</option>
+<option value="Chester">Chester</option>
+<option value="Chloe">Chloe</option>
+<option value="Christian">Christian</option>
+<option value="Christina">Christina</option>
+<option value="Christine">Christine</option>
+<option value="Christopher">Christopher</option>
+<option value="Clair">Clair</option>
+<option value="Claire">Claire</option>
+<option value="Clara">Clara</option>
+<option value="Clare">Clare</option>
+<option value="Clarence">Clarence</option>
+<option value="Claude">Claude</option>
+<option value="Clifford">Clifford</option>
+<option value="Clive">Clive</option>
+<option value="Colin">Colin</option>
+<option value="Connor">Connor</option>
+<option value="Conor">Conor</option>
+<option value="Constance">Constance</option>
+<option value="Corey">Corey</option>
+<option value="Courtney">Courtney</option>
+<option value="Craig">Craig</option>
+<option value="Curtis">Curtis</option>
+<option value="Cynthia">Cynthia</option>
+<option value="Cyril">Cyril</option>
+<option value="Daisy">Daisy</option>
+<option value="Dale">Dale</option>
+<option value="Damian">Damian</option>
+<option value="Damien">Damien</option>
+<option value="Daniel">Daniel</option>
+<option value="Danielle">Danielle</option>
+<option value="Danny">Danny</option>
+<option value="Daphne">Daphne</option>
+<option value="Darcey">Darcey</option>
+<option value="Darcie">Darcie</option>
+<option value="Darcy">Darcy</option>
+<option value="Darren">Darren</option>
+<option value="David">David</option>
+<option value="Dawn">Dawn</option>
+<option value="Dean">Dean</option>
+<option value="Debbie">Debbie</option>
+<option value="Deborah">Deborah</option>
+<option value="Debra">Debra</option>
+<option value="Declan">Declan</option>
+<option value="Delilah">Delilah</option>
+<option value="Demi">Demi</option>
+<option value="Denis">Denis</option>
+<option value="Denise">Denise</option>
+<option value="Dennis">Dennis</option>
+<option value="Derek">Derek</option>
+<option value="Derrick">Derrick</option>
+<option value="Desmond">Desmond</option>
+<option value="Dexter">Dexter</option>
+<option value="Diana">Diana</option>
+<option value="Diane">Diane</option>
+<option value="Dominic">Dominic</option>
+<option value="Donald">Donald</option>
+<option value="Donna">Donna</option>
+<option value="Dora">Dora</option>
+<option value="Doreen">Doreen</option>
+<option value="Doris">Doris</option>
+<option value="Dorothy">Dorothy</option>
+<option value="Douglas">Douglas</option>
+<option value="Duncan">Duncan</option>
+<option value="Dylan">Dylan</option>
+<option value="Eden">Eden</option>
+<option value="Edgar">Edgar</option>
+<option value="Edith">Edith</option>
+<option value="Edmund">Edmund</option>
+<option value="Edna">Edna</option>
+<option value="Edward">Edward</option>
+<option value="Edwin">Edwin</option>
+<option value="Eileen">Eileen</option>
+<option value="Elaine">Elaine</option>
+<option value="Eleanor">Eleanor</option>
+<option value="Elijah">Elijah</option>
+<option value="Elise">Elise</option>
+<option value="Eliza">Eliza</option>
+<option value="Elizabeth">Elizabeth</option>
+<option value="Ella">Ella</option>
+<option value="Elle">Elle</option>
+<option value="Ellen">Ellen</option>
+<option value="Ellie">Ellie</option>
+<option value="Elliot">Elliot</option>
+<option value="Elliott">Elliott</option>
+<option value="Ellis">Ellis</option>
+<option value="Elodie">Elodie</option>
+<option value="Eloise">Eloise</option>
+<option value="Elsie">Elsie</option>
+<option value="Emilia">Emilia</option>
+<option value="Emily">Emily</option>
+<option value="Emma">Emma</option>
+<option value="Enid">Enid</option>
+<option value="Eric">Eric</option>
+<option value="Erin">Erin</option>
+<option value="Ernest">Ernest</option>
+<option value="Esme">Esme</option>
+<option value="Esther">Esther</option>
+<option value="Ethan">Ethan</option>
+<option value="Ethel">Ethel</option>
+<option value="Eva">Eva</option>
+<option value="Evan">Evan</option>
+<option value="Eve">Eve</option>
+<option value="Evelyn">Evelyn</option>
+<option value="Evie">Evie</option>
+<option value="Ewan">Ewan</option>
+<option value="Ezra">Ezra</option>
+<option value="Faith">Faith</option>
+<option value="Fanny">Fanny</option>
+<option value="Felicity">Felicity</option>
+<option value="Felix">Felix</option>
+<option value="Finlay">Finlay</option>
+<option value="Finley">Finley</option>
+<option value="Finn">Finn</option>
+<option value="Fiona">Fiona</option>
+<option value="Florence">Florence</option>
+<option value="Frances">Frances</option>
+<option value="Francesca">Francesca</option>
+<option value="Francis">Francis</option>
+<option value="Frank">Frank</option>
+<option value="Frankie">Frankie</option>
+<option value="Fred">Fred</option>
+<option value="Freda">Freda</option>
+<option value="Freddie">Freddie</option>
+<option value="Frederick">Frederick</option>
+<option value="Freya">Freya</option>
+<option value="Gabriel">Gabriel</option>
+<option value="Gabrielle">Gabrielle</option>
+<option value="Gail">Gail</option>
+<option value="Gareth">Gareth</option>
+<option value="Garry">Garry</option>
+<option value="Gary">Gary</option>
+<option value="Gavin">Gavin</option>
+<option value="Gemma">Gemma</option>
+<option value="Geoffrey">Geoffrey</option>
+<option value="George">George</option>
+<option value="Georgia">Georgia</option>
+<option value="Georgina">Georgina</option>
+<option value="Gerald">Gerald</option>
+<option value="Geraldine">Geraldine</option>
+<option value="Gerard">Gerard</option>
+<option value="Gertrude">Gertrude</option>
+<option value="Gilbert">Gilbert</option>
+<option value="Gillian">Gillian</option>
+<option value="Gladys">Gladys</option>
+<option value="Glen">Glen</option>
+<option value="Glenn">Glenn</option>
+<option value="Glenys">Glenys</option>
+<option value="Gloria">Gloria</option>
+<option value="Glynis">Glynis</option>
+<option value="Gordon">Gordon</option>
+<option value="Grace">Grace</option>
+<option value="Gracie">Gracie</option>
+<option value="Graeme">Graeme</option>
+<option value="Graham">Graham</option>
+<option value="Grayson">Grayson</option>
+<option value="Gregory">Gregory</option>
+<option value="Guy">Guy</option>
+<option value="Gwendoline">Gwendoline</option>
+<option value="Hallie">Hallie</option>
+<option value="Hannah">Hannah</option>
+<option value="Harley">Harley</option>
+<option value="Harold">Harold</option>
+<option value="Harper">Harper</option>
+<option value="Harriet">Harriet</option>
+<option value="Harrison">Harrison</option>
+<option value="Harry">Harry</option>
+<option value="Harvey">Harvey</option>
+<option value="Hayden">Hayden</option>
+<option value="Hayley">Hayley</option>
+<option value="Hazel">Hazel</option>
+<option value="Heather">Heather</option>
+<option value="Hector">Hector</option>
+<option value="Heidi">Heidi</option>
+<option value="Helen">Helen</option>
+<option value="Henry">Henry</option>
+<option value="Herbert">Herbert</option>
+<option value="Hilary">Hilary</option>
+<option value="Hilda">Hilda</option>
+<option value="Hollie">Hollie</option>
+<option value="Holly">Holly</option>
+<option value="Horace">Horace</option>
+<option value="Howard">Howard</option>
+<option value="Hubert">Hubert</option>
+<option value="Hudson">Hudson</option>
+<option value="Hugh">Hugh</option>
+<option value="Hugo">Hugo</option>
+<option value="Hunter">Hunter</option>
+<option value="Iain">Iain</option>
+<option value="Ian">Ian</option>
+<option value="Ibrahim">Ibrahim</option>
+<option value="Ida">Ida</option>
+<option value="Imogen">Imogen</option>
+<option value="Irene">Irene</option>
+<option value="Iris">Iris</option>
+<option value="Isaac">Isaac</option>
+<option value="Isabel">Isabel</option>
+<option value="Isabella">Isabella</option>
+<option value="Isabelle">Isabelle</option>
+<option value="Isla">Isla</option>
+<option value="Isobel">Isobel</option>
+<option value="Ivan">Ivan</option>
+<option value="Ivor">Ivor</option>
+<option value="Ivy">Ivy</option>
+<option value="Jack">Jack</option>
+<option value="Jackson">Jackson</option>
+<option value="Jacob">Jacob</option>
+<option value="Jacqueline">Jacqueline</option>
+<option value="Jade">Jade</option>
+<option value="Jake">Jake</option>
+<option value="James">James</option>
+<option value="Jamie">Jamie</option>
+<option value="Jane">Jane</option>
+<option value="Janet">Janet</option>
+<option value="Janice">Janice</option>
+<option value="Jasmine">Jasmine</option>
+<option value="Jason">Jason</option>
+<option value="Jasper">Jasper</option>
+<option value="Jaxon">Jaxon</option>
+<option value="Jay">Jay</option>
+<option value="Jayden">Jayden</option>
+<option value="Jayne">Jayne</option>
+<option value="Jean">Jean</option>
+<option value="Jeanette">Jeanette</option>
+<option value="Jeffrey">Jeffrey</option>
+<option value="Jemma">Jemma</option>
+<option value="Jenna">Jenna</option>
+<option value="Jennifer">Jennifer</option>
+<option value="Jenny">Jenny</option>
+<option value="Jenson">Jenson</option>
+<option value="Jeremy">Jeremy</option>
+<option value="Jesse">Jesse</option>
+<option value="Jessica">Jessica</option>
+<option value="Jessie">Jessie</option>
+<option value="Jill">Jill</option>
+<option value="Joan">Joan</option>
+<option value="Joanna">Joanna</option>
+<option value="Joanne">Joanne</option>
+<option value="Jodie">Jodie</option>
+<option value="Joe">Joe</option>
+<option value="Joel">Joel</option>
+<option value="Joey">Joey</option>
+<option value="John">John</option>
+<option value="Jonathan">Jonathan</option>
+<option value="Jordan">Jordan</option>
+<option value="Joseph">Joseph</option>
+<option value="Josephine">Josephine</option>
+<option value="Josh">Josh</option>
+<option value="Joshua">Joshua</option>
+<option value="Joy">Joy</option>
+<option value="Joyce">Joyce</option>
+<option value="Jude">Jude</option>
+<option value="Judith">Judith</option>
+<option value="Julia">Julia</option>
+<option value="Julian">Julian</option>
+<option value="Julie">Julie</option>
+<option value="June">June</option>
+<option value="Justin">Justin</option>
+<option value="Kai">Kai</option>
+<option value="Kane">Kane</option>
+<option value="Karen">Karen</option>
+<option value="Karl">Karl</option>
+<option value="Kate">Kate</option>
+<option value="Katherine">Katherine</option>
+<option value="Kathleen">Kathleen</option>
+<option value="Kathryn">Kathryn</option>
+<option value="Katie">Katie</option>
+<option value="Katy">Katy</option>
+<option value="Kay">Kay</option>
+<option value="Kayden">Kayden</option>
+<option value="Kayla">Kayla</option>
+<option value="Kayleigh">Kayleigh</option>
+<option value="Keira">Keira</option>
+<option value="Keith">Keith</option>
+<option value="Kelly">Kelly</option>
+<option value="Kelsey">Kelsey</option>
+<option value="Kenneth">Kenneth</option>
+<option value="Kerry">Kerry</option>
+<option value="Kevin">Kevin</option>
+<option value="Kian">Kian</option>
+<option value="Kiera">Kiera</option>
+<option value="Kieran">Kieran</option>
+<option value="Kieron">Kieron</option>
+<option value="Kim">Kim</option>
+<option value="Kimberley">Kimberley</option>
+<option value="Kirsty">Kirsty</option>
+<option value="Kyle">Kyle</option>
+<option value="Lacey">Lacey</option>
+<option value="Laila">Laila</option>
+<option value="Lara">Lara</option>
+<option value="Laura">Laura</option>
+<option value="Lauren">Lauren</option>
+<option value="Laurence">Laurence</option>
+<option value="Lawrence">Lawrence</option>
+<option value="Layla">Layla</option>
+<option value="Leah">Leah</option>
+<option value="Leanne">Leanne</option>
+<option value="Lee">Lee</option>
+<option value="Leigh">Leigh</option>
+<option value="Leo">Leo</option>
+<option value="Leon">Leon</option>
+<option value="Leonard">Leonard</option>
+<option value="Lesley">Lesley</option>
+<option value="Leslie">Leslie</option>
+<option value="Lewis">Lewis</option>
+<option value="Lexi">Lexi</option>
+<option value="Lexie">Lexie</option>
+<option value="Liam">Liam</option>
+<option value="Libby">Libby</option>
+<option value="Lilian">Lilian</option>
+<option value="Lillian">Lillian</option>
+<option value="Lilly">Lilly</option>
+<option value="Lily">Lily</option>
+<option value="Linda">Linda</option>
+<option value="Lindsay">Lindsay</option>
+<option value="Lindsey">Lindsey</option>
+<option value="Lionel">Lionel</option>
+<option value="Lisa">Lisa</option>
+<option value="Logan">Logan</option>
+<option value="Lola">Lola</option>
+<option value="Lorraine">Lorraine</option>
+<option value="Lottie">Lottie</option>
+<option value="Louie">Louie</option>
+<option value="Louis">Louis</option>
+<option value="Louisa">Louisa</option>
+<option value="Louise">Louise</option>
+<option value="Luca">Luca</option>
+<option value="Lucas">Lucas</option>
+<option value="Lucy">Lucy</option>
+<option value="Luke">Luke</option>
+<option value="Luna">Luna</option>
+<option value="Lydia">Lydia</option>
+<option value="Lyla">Lyla</option>
+<option value="Lynda">Lynda</option>
+<option value="Lyndsey">Lyndsey</option>
+<option value="Lynn">Lynn</option>
+<option value="Lynne">Lynne</option>
+<option value="Lynsey">Lynsey</option>
+<option value="Lyra">Lyra</option>
+<option value="Mabel">Mabel</option>
+<option value="Macauley">Macauley</option>
+<option value="Maddison">Maddison</option>
+<option value="Madeleine">Madeleine</option>
+<option value="Madison">Madison</option>
+<option value="Maeve">Maeve</option>
+<option value="Maisie">Maisie</option>
+<option value="Maisy">Maisy</option>
+<option value="Malcolm">Malcolm</option>
+<option value="Mandy">Mandy</option>
+<option value="Marc">Marc</option>
+<option value="Marcus">Marcus</option>
+<option value="Margaret">Margaret</option>
+<option value="Margery">Margery</option>
+<option value="Margot">Margot</option>
+<option value="Maria">Maria</option>
+<option value="Marian">Marian</option>
+<option value="Marie">Marie</option>
+<option value="Marilyn">Marilyn</option>
+<option value="Marina">Marina</option>
+<option value="Marion">Marion</option>
+<option value="Marjorie">Marjorie</option>
+<option value="Mark">Mark</option>
+<option value="Marlene">Marlene</option>
+<option value="Martha">Martha</option>
+<option value="Martin">Martin</option>
+<option value="Martyn">Martyn</option>
+<option value="Mary">Mary</option>
+<option value="Maryam">Maryam</option>
+<option value="Mason">Mason</option>
+<option value="Mathew">Mathew</option>
+<option value="Matilda">Matilda</option>
+<option value="Matthew">Matthew</option>
+<option value="Maud">Maud</option>
+<option value="Maureen">Maureen</option>
+<option value="Maurice">Maurice</option>
+<option value="Mavis">Mavis</option>
+<option value="Max">Max</option>
+<option value="Maxine">Maxine</option>
+<option value="May">May</option>
+<option value="Maya">Maya</option>
+<option value="Megan">Megan</option>
+<option value="Melanie">Melanie</option>
+<option value="Melissa">Melissa</option>
+<option value="Melvyn">Melvyn</option>
+<option value="Mia">Mia</option>
+<option value="Michael">Michael</option>
+<option value="Michele">Michele</option>
+<option value="Michelle">Michelle</option>
+<option value="Mila">Mila</option>
+<option value="Mildred">Mildred</option>
+<option value="Millicent">Millicent</option>
+<option value="Millie">Millie</option>
+<option value="Milo">Milo</option>
+<option value="Minnie">Minnie</option>
+<option value="Miriam">Miriam</option>
+<option value="Mitchell">Mitchell</option>
+<option value="Mohamed">Mohamed</option>
+<option value="Mohammad">Mohammad</option>
+<option value="Mohammed">Mohammed</option>
+<option value="Mollie">Mollie</option>
+<option value="Molly">Molly</option>
+<option value="Monica">Monica</option>
+<option value="Morgan">Morgan</option>
+<option value="Morris">Morris</option>
+<option value="Muhammad">Muhammad</option>
+<option value="Muriel">Muriel</option>
+<option value="Mya">Mya</option>
+<option value="Myla">Myla</option>
+<option value="Myles">Myles</option>
+<option value="Nancy">Nancy</option>
+<option value="Naomi">Naomi</option>
+<option value="Natalie">Natalie</option>
+<option value="Natasha">Natasha</option>
+<option value="Nathan">Nathan</option>
+<option value="Neil">Neil</option>
+<option value="Nellie">Nellie</option>
+<option value="Neville">Neville</option>
+<option value="Niamh">Niamh</option>
+<option value="Nichola">Nichola</option>
+<option value="Nicholas">Nicholas</option>
+<option value="Nicola">Nicola</option>
+<option value="Nicole">Nicole</option>
+<option value="Nigel">Nigel</option>
+<option value="Noah">Noah</option>
+<option value="Noel">Noel</option>
+<option value="Nora">Nora</option>
+<option value="Norah">Norah</option>
+<option value="Norma">Norma</option>
+<option value="Norman">Norman</option>
+<option value="Oakley">Oakley</option>
+<option value="Olive">Olive</option>
+<option value="Oliver">Oliver</option>
+<option value="Olivia">Olivia</option>
+<option value="Ollie">Ollie</option>
+<option value="Orla">Orla</option>
+<option value="Oscar">Oscar</option>
+<option value="Otis">Otis</option>
+<option value="Owen">Owen</option>
+<option value="Paige">Paige</option>
+<option value="Pamela">Pamela</option>
+<option value="Patricia">Patricia</option>
+<option value="Patrick">Patrick</option>
+<option value="Paul">Paul</option>
+<option value="Paula">Paula</option>
+<option value="Pauline">Pauline</option>
+<option value="Peggy">Peggy</option>
+<option value="Penelope">Penelope</option>
+<option value="Percival">Percival</option>
+<option value="Percy">Percy</option>
+<option value="Peter">Peter</option>
+<option value="Philip">Philip</option>
+<option value="Phillip">Phillip</option>
+<option value="Phoebe">Phoebe</option>
+<option value="Phyllis">Phyllis</option>
+<option value="Poppy">Poppy</option>
+<option value="Rachael">Rachael</option>
+<option value="Rachel">Rachel</option>
+<option value="Ralph">Ralph</option>
+<option value="Raymond">Raymond</option>
+<option value="Rebecca">Rebecca</option>
+<option value="Rebekah">Rebekah</option>
+<option value="Reece">Reece</option>
+<option value="Reggie">Reggie</option>
+<option value="Reginald">Reginald</option>
+<option value="Reuben">Reuben</option>
+<option value="Rhiannon">Rhiannon</option>
+<option value="Rhys">Rhys</option>
+<option value="Richard">Richard</option>
+<option value="Ricky">Ricky</option>
+<option value="Riley">Riley</option>
+<option value="Rita">Rita</option>
+<option value="Robert">Robert</option>
+<option value="Robin">Robin</option>
+<option value="Robyn">Robyn</option>
+<option value="Rodney">Rodney</option>
+<option value="Roger">Roger</option>
+<option value="Roland">Roland</option>
+<option value="Roman">Roman</option>
+<option value="Ronald">Ronald</option>
+<option value="Ronnie">Ronnie</option>
+<option value="Rory">Rory</option>
+<option value="Rose">Rose</option>
+<option value="Rosemary">Rosemary</option>
+<option value="Rosie">Rosie</option>
+<option value="Rosina">Rosina</option>
+<option value="Ross">Ross</option>
+<option value="Rowan">Rowan</option>
+<option value="Roy">Roy</option>
+<option value="Royston">Royston</option>
+<option value="Ruby">Ruby</option>
+<option value="Russell">Russell</option>
+<option value="Ruth">Ruth</option>
+<option value="Ryan">Ryan</option>
+<option value="Sally">Sally</option>
+<option value="Sam">Sam</option>
+<option value="Samantha">Samantha</option>
+<option value="Samuel">Samuel</option>
+<option value="Sandra">Sandra</option>
+<option value="Sara">Sara</option>
+<option value="Sarah">Sarah</option>
+<option value="Scarlett">Scarlett</option>
+<option value="Scott">Scott</option>
+<option value="Sean">Sean</option>
+<option value="Sebastian">Sebastian</option>
+<option value="Seth">Seth</option>
+<option value="Shane">Shane</option>
+<option value="Shannon">Shannon</option>
+<option value="Sharon">Sharon</option>
+<option value="Shaun">Shaun</option>
+<option value="Sheila">Sheila</option>
+<option value="Shirley">Shirley</option>
+<option value="Sian">Sian</option>
+<option value="Sidney">Sidney</option>
+<option value="Sienna">Sienna</option>
+<option value="Simon">Simon</option>
+<option value="Skye">Skye</option>
+<option value="Sofia">Sofia</option>
+<option value="Sonia">Sonia</option>
+<option value="Sonny">Sonny</option>
+<option value="Sophia">Sophia</option>
+<option value="Sophie">Sophie</option>
+<option value="Spencer">Spencer</option>
+<option value="Stacey">Stacey</option>
+<option value="Stanley">Stanley</option>
+<option value="Stella">Stella</option>
+<option value="Stephanie">Stephanie</option>
+<option value="Stephen">Stephen</option>
+<option value="Steven">Steven</option>
+<option value="Stewart">Stewart</option>
+<option value="Stuart">Stuart</option>
+<option value="Summer">Summer</option>
+<option value="Susan">Susan</option>
+<option value="Suzanne">Suzanne</option>
+<option value="Sybil">Sybil</option>
+<option value="Sydney">Sydney</option>
+<option value="Sylvia">Sylvia</option>
+<option value="Tanya">Tanya</option>
+<option value="Tara">Tara</option>
+<option value="Taylor">Taylor</option>
+<option value="Teddy">Teddy</option>
+<option value="Tegan">Tegan</option>
+<option value="Terence">Terence</option>
+<option value="Teresa">Teresa</option>
+<option value="Terry">Terry</option>
+<option value="Thea">Thea</option>
+<option value="Thelma">Thelma</option>
+<option value="Theo">Theo</option>
+<option value="Theodore">Theodore</option>
+<option value="Theresa">Theresa</option>
+<option value="Thomas">Thomas</option>
+<option value="Tia">Tia</option>
+<option value="Tilly">Tilly</option>
+<option value="Timothy">Timothy</option>
+<option value="Tina">Tina</option>
+<option value="Tobias">Tobias</option>
+<option value="Toby">Toby</option>
+<option value="Tom">Tom</option>
+<option value="Tommy">Tommy</option>
+<option value="Toni">Toni</option>
+<option value="Tony">Tony</option>
+<option value="Tracey">Tracey</option>
+<option value="Tracy">Tracy</option>
+<option value="Trevor">Trevor</option>
+<option value="Tyler">Tyler</option>
+<option value="Valerie">Valerie</option>
+<option value="Vanessa">Vanessa</option>
+<option value="Vera">Vera</option>
+<option value="Veronica">Veronica</option>
+<option value="Victor">Victor</option>
+<option value="Victoria">Victoria</option>
+<option value="Vincent">Vincent</option>
+<option value="Violet">Violet</option>
+<option value="Vivienne">Vivienne</option>
+<option value="Walter">Walter</option>
+<option value="Wayne">Wayne</option>
+<option value="Wendy">Wendy</option>
+<option value="Wilfred">Wilfred</option>
+<option value="William">William</option>
+<option value="Willow">Willow</option>
+<option value="Winifred">Winifred</option>
+<option value="Yasmin">Yasmin</option>
+<option value="Yusuf">Yusuf</option>
+<option value="Yvonne">Yvonne</option>
+<option value="Zachary">Zachary</option>
+<option value="Zak">Zak</option>
+<option value="Zara">Zara</option>
+<option value="Zoe">Zoe</option></select>
+<script type="application/json" data-for="names_options" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<p></p><div id="outPlot" class="shiny-plot-output" style="width:100%;height:400px;"></div><p></p>
+</div>
+<div class="cell-output-display">
+<p></p><div id="textOutPut" class="shiny-text-output"></div><p></p>
+</div>
+</div>
+<p>Lower rank shows more babies born with this designated name during that year.</p>
+<div class="cell" data-context="server">
+
+</div>
+</section>
+<section id="about-the-data" class="level1">
+<h1>About the data:</h1>
+<p>The data is from Office of National Statistics, merged two data sets one from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalestop100babynameshistoricaldata">1904 - 1994</a> which was set for every 10 years and another from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesinenglandandwalesfrom1996">1996-2020</a> which is yearly data.</p>
+<p>All data belongs to <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/bulletins/babynamesenglandandwales/2020/relateddata">Office for National Statistics</a></p>
+<p>Data is Crown Copyright, reproduced under <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government License</a></p>
+<p>I merged the data into one file to be used</p>
+
+<script type="application/shiny-prerendered" data-context="data">
+library(tidyverse)
+library(ggplot2)
+library(shiny)
+names = readxl::read_xlsx("names.xlsx",sheet="names")
+names$Names <- str_to_title(names$Names)
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+
+
+library(tidyverse)
+library(ggthemes)
+library(ggrepel)
+
+
+output$outPlot <- renderPlot({
+  filtered_data <- reactive({
+  dplyr::filter(names, Names == input$names_options)
+    
+
+})
+ 
+  
+ggplot(filtered_data(), aes(x = Year, y = RANK, label = paste0("Year: ",Year, "\nRank: ", RANK)))+ geom_point(color="#FF00CC") + geom_line(color = "#CD5C5C") + geom_area(fill = "#FF6F00", alpha = 0.5) +geom_label_repel() +
+  labs(title = paste0(str_to_title(filtered_data()$Names), " Total: ", sum(filtered_data()$Count)), 
+       subtitle = paste0("First recorded in year: ",  min(filtered_data()$Year),  "\nLatest recording in: ", max(filtered_data()$Year)))+theme_fivethirtyeight() 
+
+
+})
+
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server-extras">
+ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
+  quos <- rlang::enquos(...)
+  vars <- rlang::list2(...)
+  nm <- names(vars)
+  if (is.null(nm)) {
+    nm <- rep_len("", length(vars))
+  }
+  mapply(function(q, nm, val) {
+    # Infer name, if possible
+    if (nm == "") {
+      tryCatch({
+        nm <- rlang::as_name(q)
+      }, error = function(e) {
+        code <- paste(collapse = "\n", deparse(rlang::f_rhs(q)))
+        stop("ojs_define() could not create a name for the argument: ", code)
+      })
+    }
+    .session$output[[nm]] <- val
+    outputOptions(.session$output, nm, suspendWhenHidden = FALSE)
+    .session$sendCustomMessage("ojs-export", list(name = nm))
+    NULL
+  }, quos, nm, vars, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+  invisible()
+}
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["selectize"]},{"type":"character","attributes":{},"value":["0.12.4"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/selectize"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"]},{"type":"character","attributes":{},"value":["css/selectize.bootstrap3.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]}]}]}
+</script>
+<!--/html_preserve-->
+<!--html_preserve-->
+
+<script type="application/shiny-prerendered" data-context="execution_dependencies">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cellranger","cli","colorspace","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","fastmap","forcats","fs","gargle","generics","ggplot2","glue","googledrive","googlesheets4","graphics","grDevices","grid","gtable","haven","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","later","lifecycle","lubridate","magrittr","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.3.0","4.1.1","0.7.12","0.3.1","1.1.0","3.1.0","2.0-2","4.1.1","1.4.2","4.1.1","1.1.1","2.1.1","0.6.28","1.0.7","0.3.2","0.14","0.5.0","1.1.0","0.5.1","1.5.0","1.2.0","0.1.1","3.3.5","1.4.2","2.0.0","1.0.0","4.1.1","4.1.1","4.1.1","0.3.0","2.4.3","1.1.1","0.5.2","1.5.4","1.6.3","1.4.2","0.1.4","1.7.2","1.36","1.3.0","1.0.1","1.8.0","2.0.1","4.1.1","0.12","0.1.8","0.5.0","1.8.1","2.0.3","1.2.0.1","0.3.4","2.5.1","1.0.7","2.1.2","1.3.1","2.0.1","1.0.4","2.11","0.13","1.0.2","0.4.0","1.1.1","1.7.2","4.1.1","1.7.5","1.4.0","3.1.8","1.1.4","1.1.1","1.3.2","4.1.1","0.1.2","1.2.2","4.1.1","0.3.8","2.4.3","0.26","1.3.3","1.8-4","2.2.1"]}]}]}
+</script>
+<!--/html_preserve-->
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

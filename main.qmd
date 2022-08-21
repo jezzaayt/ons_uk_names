@@ -1,0 +1,81 @@
+---
+title: "Office of National Statistics (UK) Baby Names"
+#author: "Jeremy Aytoun"
+format: html
+server: shiny
+---
+
+## Why did I build this?
+
+I wanted to investigate names and when they were first and latest recorded as births after seeing a statistic for names in a trivia game "Shot in the Dark". While seeing Quarto and Shiny project. I took the top 100 names from the listings and some names outside of the top 100 as was curious for those names.
+
+So if were wanting to use the data for top 100, would have to filter the data set
+
+In process of creating this, I discovered there is  similar tool created by [Anna Powell Smith](https://names.darkgreener.com/). Though, I am using this as a learning experience on R Shiny and Quarto.
+
+Data set Columns: Rank, Year, Name, Gender, Count of births
+
+```{r Loading Data}
+#| include: false
+#| context: data
+library(tidyverse)
+library(ggplot2)
+library(shiny)
+names = readxl::read_xlsx("names.xlsx",sheet="names")
+names$Names <- str_to_title(names$Names)
+
+```
+
+Total number of births are counted from 1996 on wards as the data set from 1904-1994 did not include number of births.
+
+```{r}
+library(ggplot2)
+
+
+selectInput("names_options","Names:", unique(sort(names$Names)))
+plotOutput("outPlot")
+
+textOutput("textOutPut")
+
+
+```
+
+Lower rank shows more babies born with this designated name during that year.
+
+```{r}
+#| context: server
+
+
+
+library(tidyverse)
+library(ggthemes)
+library(ggrepel)
+
+
+output$outPlot <- renderPlot({
+  filtered_data <- reactive({
+  dplyr::filter(names, Names == input$names_options)
+    
+
+})
+ 
+  
+ggplot(filtered_data(), aes(x = Year, y = RANK, label = paste0("Year: ",Year, "\nRank: ", RANK)))+ geom_point(color="#FF00CC") + geom_line(color = "#CD5C5C") + geom_area(fill = "#FF6F00", alpha = 0.5) +geom_label_repel() +
+  labs(title = paste0(str_to_title(filtered_data()$Names), " Total: ", sum(filtered_data()$Count)), 
+       subtitle = paste0("First recorded in year: ",  min(filtered_data()$Year),  "\nLatest recording in: ", max(filtered_data()$Year)))+theme_fivethirtyeight() 
+
+
+})
+
+
+```
+
+# About the data:
+
+The data is from Office of National Statistics, merged two data sets one from [1904 - 1994](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalestop100babynameshistoricaldata) which was set for every 10 years and another from [1996-2020](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesinenglandandwalesfrom1996) which is yearly data.
+
+All data belongs to [Office for National Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/bulletins/babynamesenglandandwales/2020/relateddata)
+
+Data is Crown Copyright, reproduced under [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
+
+I merged the data into one file to be used
